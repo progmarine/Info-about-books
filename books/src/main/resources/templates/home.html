@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>KASPI_TEST</title>
+</head>
+<body>
+<div>
+    <div>
+        <a href="/users">All users</a>
+        <a href="/books">All books</a>
+        <form th:action="'/users'" method="post">
+            <input type="text" name="title" placeholder="Name..." class="form-control">
+            <input type="text" name="author" placeholder="Email..." class="form-control"><br>
+            <textarea name="text" placeholder="Text..." class="form-control"></textarea><br>
+            <button type="submit">Add user</button>
+        </form>
+        <form th:action="'/books'" method="post">
+            <input type="text" name="title" placeholder="Title..." class="form-control">
+            <textarea name="text" placeholder="Description..." class="form-control"></textarea><br>
+            <button type="submit">Add book</button>
+        </form>
+    </div>
+    <h2>Books</h2>
+    <div th:each="book : ${books}" >
+        <h3 th:text="'Title: '+${book.name}"/>
+        <p th:text="'Description: '+${book.description}"/>
+        <a th:href="'/books/' + ${book.id} + '/users'" >Who reads it</a>
+    </div>
+    <h2>Users</h2>
+    <div th:each="user : ${users}" >
+        <h3 th:text="'User: '+${user.name}"/>
+        <p th:text="'Email: '+${user.email}"/>
+        <a th:href="'/users/' + ${user.id} + '/books'" >What reads</a>
+    </div>
+</div>
+
+</body>
+</html>
