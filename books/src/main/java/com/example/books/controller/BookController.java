@@ -35,7 +35,7 @@ public class BookController {
     }
 
     @GetMapping("/books/{bookId}/users")
-    public ResponseEntity<List<User>> getAllTutorialsByTagId(@PathVariable(value = "bookId") Long bookId) {
+    public ResponseEntity<List<User>> getAllUsersByBookId(@PathVariable(value = "bookId") Long bookId) {
         if (!bookRepo.existsById(bookId)) {
             throw new RuntimeException("Not found Book with id = " + bookId);
         }
@@ -88,7 +88,7 @@ public class BookController {
         bookRepo.delete(book);
     }
     @DeleteMapping("/users/{userId}/books/{bookId}")
-    public void deleteTagFromTutorial(@PathVariable(value = "userId") Long userId,
+    public void deleteBookFromUser(@PathVariable(value = "userId") Long userId,
                                                             @PathVariable(value = "bookId") Long bookId) {
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Not found User with id = " + userId));
